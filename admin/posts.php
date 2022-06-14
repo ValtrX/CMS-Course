@@ -18,21 +18,36 @@
                         <small>Author</small>
                     </h1>
 
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Author</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Image</th>
-                                <th>Tags</th>
-                                <th>Comments</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <?php
+
+                    if (isset($_GET['source'])) {
+                        $source = $_GET['source'];
+
+                    }else{
+                        $source = '';
+                    }
+                    
+                    switch ($source) {
+                        case 'add_post':
+                            include "includes/add_post.php";
+                            break;
+                        case 'edit_post':
+                            include "includes/edit_post.php";
+
+                            break;
+                        case '200':
+                            echo "NICE";
+                            break;
+                        default:
+
+                            include "includes/view_all_posts.php";
+
+                            break;
+                    }
+
+                    
+
+                    ?>
 
 
                 </div>
