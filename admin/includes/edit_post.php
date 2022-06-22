@@ -34,15 +34,13 @@ if (isset($_POST['update_post'])) {
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
     if (empty($post_image)) {
-        
+
         $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
         $select_image = mysqli_query($connection, $query);
 
-        while($row = mysqli_fetch_array($select_image)){
+        while ($row = mysqli_fetch_array($select_image)) {
             $post_image = $row['post_image'];
         }
-
-
     }
 
 
@@ -71,12 +69,12 @@ if (isset($_POST['update_post'])) {
         <input value="<?php echo $post_title ?>" type="text" name="title" class="form-control">
     </div>
 
-   
+
 
     <div class="form-group">
         <select name="post_category" id="post_category">
-            <?php 
-            
+            <?php
+
             $query = "SELECT * FROM categories";
             $select_categories = mysqli_query($connection,  $query);
 
@@ -86,21 +84,45 @@ if (isset($_POST['update_post'])) {
                 $cat_id = $row['cat_id'];
                 $cat_title = $row['cat_title'];
                 echo "<option value='{$cat_id}'>{$cat_title}</option>";
-
             }
             ?>
         </select>
     </div>
 
-    <div class="form-group">
+
+    <!-- <div class="form-group">
         <label for="post_author">Post Status</label>
         <input value="<?php echo $post_status ?>" type="text" class="form-control" name="post_status">
-    </div>
+    </div> -->
+
+    <!-- <div class="form-group">
+        <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+    </div> -->
 
     <div class="form-group">
-        <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+        <label for="post_author">Post Author</label>
+        <input value="<?php echo $post_author ?>" type="text" class="form-control" name="post_author">
     </div>
+    <div class="form-group">
+        <label for="post_status">Post Status</label>
 
+        <select name="post_status" id="">
+            <option value="<?php echo $post_status ?>"><?php echo $post_status ?></option>
+            
+            <?php if ($post_status == 'published') {
+                
+                echo "<option value='draft'>Draft</option>";
+                
+            }else{
+                
+                echo "<option value='published'>Publish</option>";
+
+
+            } ?>
+
+        </select>
+
+    </div>
     <div class="form-group">
         <label for="post_tags">Post Tags</label>
         <input value="<?php echo $post_tags ?>" type="text" class="form-control" name="post_tags">
@@ -108,10 +130,12 @@ if (isset($_POST['update_post'])) {
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $post_content ?></textarea>
+        <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10"><?php echo $post_content ?></textarea>
     </div>
 
+
+
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
+        <input type="submit" class="btn btn-primary" name="create_post" value="Update Post">
     </div>
 </form>
