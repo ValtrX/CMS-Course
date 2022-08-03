@@ -44,20 +44,22 @@ if (isset($_POST['update_post'])) {
     }
 
 
-    $query = "UPDATE posts SET";
+    $query = "UPDATE posts SET ";
     $query .= "post_title = '{$post_title}', ";
-    $query .= "post_category_id = '{$post_category_id}', ";
+    $query .= "post_category_id = {$post_category_id}, ";
     $query .= "post_date = NOW(), ";
     $query .= "post_author = '{$post_author}', ";
     $query .= "post_status = '{$post_status}', ";
     $query .= "post_tags = '{$post_tags}', ";
     $query .= "post_content = '{$post_content}', ";
-    $query .= "post_image = '{$post_image}', ";
-    $query .= "WHERE post_id = '{$the_post_id}' ";
+    $query .= "post_image = '{$post_image}' ";
+    $query .= "WHERE post_id = {$the_post_id} ";
 
     $update_post = mysqli_query($connection, $query);
 
     confirmQuery($update_post);
+
+    echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$the_post_id}'>View Post</a> or <a href='posts.php'>Edit More Posts</a></p>";
 }
 ?>
 
@@ -66,7 +68,7 @@ if (isset($_POST['update_post'])) {
 
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input value="<?php echo $post_title ?>" type="text" name="title" class="form-control">
+        <input value="<?php echo $post_title ?>" type="text" name="post_title" class="form-control">
     </div>
 
 
@@ -90,14 +92,11 @@ if (isset($_POST['update_post'])) {
     </div>
 
 
-    <!-- <div class="form-group">
-        <label for="post_author">Post Status</label>
-        <input value="<?php echo $post_status ?>" type="text" class="form-control" name="post_status">
-    </div> -->
 
-    <!-- <div class="form-group">
+    <div class="form-group">
         <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
-    </div> -->
+        <input type="file" id="file" name="image" >
+    </div>
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
@@ -136,6 +135,6 @@ if (isset($_POST['update_post'])) {
 
 
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="create_post" value="Update Post">
+        <input type="submit" class="btn btn-primary" name="update_post" value="Update Post">
     </div>
 </form>
