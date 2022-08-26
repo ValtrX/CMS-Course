@@ -15,8 +15,16 @@
 
             <?php
             if (isset($_GET['p_id'])) {
+
                 $the_post_id = $_GET['p_id'];
-            }
+
+                $view_query = "UPDATE posts SET post_view_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+                $send_query = mysqli_query($connection, $view_query);
+
+                if (!$send_query) {
+                    die("query failed");
+                }
+            
 
             $query  = "SELECT * FROM posts WHERE post_id = $the_post_id";
 
@@ -52,7 +60,13 @@
            
                 <hr>
 
-            <?php } ?>
+            <?php } 
+        
+        
+        
+        }else {
+            header("Location: index.php");
+        } ?>
 
             <!-- Blog Comments -->
 
@@ -76,6 +90,9 @@
                     if (!$create_comment_query) {
                         die('QUERY FAILED' . mysqli_error($connection));
                     }
+
+
+                    header("Location: post.php?p_id=$the_post_id");
         
                     $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
                     $query .= "WHERE post_id = $the_post_id ";
