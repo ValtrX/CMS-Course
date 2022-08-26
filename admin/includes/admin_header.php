@@ -34,6 +34,9 @@ if (!isset($_SESSION['user_role'])) {
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Loader CSS -->
+    <link href="/css/loader.css" rel="stylesheet" type="text/css">
     
     <!-- Summernote Text Editor -->
     <link href="css/summernote.css" rel="stylesheet" type="text/css">
