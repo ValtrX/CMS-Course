@@ -1,5 +1,14 @@
 <?php include "includes/admin_header.php" ?>
 
+
+<?php
+
+
+?>
+
+
+
+
 <div id="wrapper">
     <?php if ($connection) {
         echo "conn";
@@ -19,6 +28,7 @@
 
                         <small> <?php echo $_SESSION['username'] ?> </small>
                     </h1>
+
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
