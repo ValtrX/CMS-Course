@@ -40,8 +40,9 @@
 
                 </span>
             </div>
-    </form> <!-- .login  -->
+        </form> <!-- .login  -->
         <!-- /.input-group -->
+    <a href="registration.php">Not registered yet? register here.</a>
     </div>
 
     <!-- Blog Categories Well -->

@@ -28,12 +28,8 @@
                 $post_status = $row['post_status'];
 
                 if ($post_status !== 'published') {
-                  
-
 
             ?>
-
-
 
                     <h1 class="page-header">
                         Page Heading

@@ -1,6 +1,45 @@
 <?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "includes/header.php"; ?>
 
+<?php 
+
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    if ( !empty($username) && !empty($email) && !empty($password)) {
+        $username = mysqli_real_escape_string($connection, $username);
+        $email = mysqli_real_escape_string($connection, $email);
+        $password = mysqli_real_escape_string($connection, $password);
+
+
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12) );
+
+        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+        $query .= "VALUES('{$username}','{$email}','{$password}', 'subscriber' )";
+
+        $registered_user_query = mysqli_query($connection, $query);
+
+        if (!$registered_user_query) {
+            die("QUERY FAILED" . mysqli_error($connection) . ' ' . mysqli_errno($connection));
+        }
+
+        $message = "Your registration has been submitted";
+
+        header("Location: registration.php ");
+
+    } else{
+        echo "Please fill all the fields";
+    }
+
+
+}
+
+
+?>
 
     <!-- Navigation -->
     
